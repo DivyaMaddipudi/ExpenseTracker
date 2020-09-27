@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "expense")
@@ -23,7 +22,7 @@ public class Expense {
 	}
 	
 	public void setId(int id) {
-		this.id = id++;
+		this.id = id;
 	}
 	
 	public String getName() {

@@ -45,21 +45,22 @@ public class HomeController {
 
 		int income = expenseTracker.getIncome();
 		int expense = expenseTracker.getExpense();
+		int balance = 0;
 		if (exp.getAmount() > 0) {
 			income += exp.getAmount();
 			expenseTracker.setIncome(income);
 
-			int balance = exp.getAmount() + expenseTracker.getInitialAmount();
+			balance = exp.getAmount() + expenseTracker.getInitialAmount();
 			expenseTracker.setInitialAmount(balance);
-			model.addAttribute("amount", balance);
+			
 		} else if (exp.getAmount() < 0) {
 			if (expenseTracker.getInitialAmount() + exp.getAmount() >= 0) {
 				expense += exp.getAmount();
 				expenseTracker.setExpense(expense);
 
-				int balance = expenseTracker.getInitialAmount() + exp.getAmount();
+				balance = expenseTracker.getInitialAmount() + exp.getAmount();
 				expenseTracker.setInitialAmount(balance);
-				model.addAttribute("amount", balance);
+				
 			} else {
 				return "error";
 			}
@@ -69,12 +70,15 @@ public class HomeController {
 			return "addInitialAmount";
 		}
 
+		model.addAttribute("amount", balance);
 		model.addAttribute("incomeVal", income);
 		model.addAttribute("expense", expense);
-
+		
+		
 		List<Expense> expList = repo.findAll();
 		model.addAttribute("expList", expList);
-
+		model.addAttribute("size", expList.size());
+		
 		return "addInitialAmount";
 	}
 
