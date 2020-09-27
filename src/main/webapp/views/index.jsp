@@ -11,16 +11,13 @@
 <hr>
 <h3>Add initial salary</h3>
 <form action="addInitialAmount" method="post">
-	Text :
+	 
+	Enter total monthly Amount :
 	<br>
-	<input type="text" name="initialAmount" placeholder="Initial amount">
-	<br> 
-	Enter Monthly Amount :
 	<br>
-	(negative -expense, positive +income)
-	<br>
-	<input type="text" name="basicAmount" placeholder="Add initial amount">
+	<input type="text" name="basicAmount" placeholder="Add initial amount" required>
 	<br>	
+	<br>
 	<input type="submit">
 </form>
 </body>

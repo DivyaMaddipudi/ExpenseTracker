@@ -30,8 +30,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/addInitialAmount", method = RequestMethod.POST)
-	public String addInitialAmount(@RequestParam("initialAmount") String name,
-			@RequestParam("basicAmount") String amount, Model model) {
+	public String addInitialAmount(@RequestParam("basicAmount") String amount, Model model) {
 		int amt = Integer.parseInt(amount);
 		expenseTracker.setInitialAmount(amt);
 		model.addAttribute("amount", amt);

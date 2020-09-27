@@ -44,7 +44,7 @@
 <form action="addExpense" method="post">
 	Text :
 	<br>
-	<input type="text" name="name" placeholder="Items..">
+	<input type="text" name="name" placeholder="Items.." required="required">
 	<br>
 	Amount :
 	<br>
