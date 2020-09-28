@@ -54,7 +54,7 @@ public class HomeController {
 			income += exp.getAmount();
 			expenseTracker.setIncome(income);
 
-			balance = exp.getAmount() + expenseTracker.getInitialAmount();
+			balance = income + expenseTracker.getInitialAmount();
 			expenseTracker.setInitialAmount(balance);
 
 		} else if (exp.getAmount() < 0) {
@@ -62,7 +62,7 @@ public class HomeController {
 				expense += exp.getAmount();
 				expenseTracker.setExpense(expense);
 
-				balance = expenseTracker.getInitialAmount() + exp.getAmount();
+				balance = expenseTracker.getInitialAmount() + expense;
 				expenseTracker.setInitialAmount(balance);
 
 			} else {
