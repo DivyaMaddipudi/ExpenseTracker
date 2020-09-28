@@ -40,6 +40,11 @@ public class HomeController {
 
 	@RequestMapping(value = "/addExpense", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addExpense(@ModelAttribute Expense exp, Model model) {
+		
+		List<Expense> items = expenseService.findAll(); 
+		if(items.size() !=0) {
+			items.clear();
+		}
 		if (exp.getAmount() != 0) {
 			expenseService.saveItem(exp);
 		}
