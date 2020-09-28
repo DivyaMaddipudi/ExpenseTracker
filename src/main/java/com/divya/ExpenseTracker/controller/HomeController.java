@@ -40,14 +40,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/addExpense", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addExpense(@ModelAttribute Expense exp, Model model) {
-		
-		List<Expense> items = expenseService.findAll(); 
-		if(items.size() !=0) {
-			items.clear();
-		}
 		if (exp.getAmount() != 0) {
 			expenseService.saveItem(exp);
 		}
+
 		List<Expense> expList = expenseService.findAll();
 
 		int income = expenseTracker.getIncome();
@@ -57,9 +53,10 @@ public class HomeController {
 		if (exp.getAmount() > 0) {
 			income += exp.getAmount();
 			expenseTracker.setIncome(income);
-			
+
 			balance = exp.getAmount() + expenseTracker.getInitialAmount();
 			expenseTracker.setInitialAmount(balance);
+
 		} else if (exp.getAmount() < 0) {
 			if (expenseTracker.getInitialAmount() + exp.getAmount() >= 0) {
 				expense += exp.getAmount();
@@ -85,41 +82,39 @@ public class HomeController {
 		return "addInitialAmount";
 	}
 
-	@RequestMapping(value = "/deleteItem/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String deleteItem(@PathVariable("id") int id, Model model) {
+
 		List<Expense> expIdList = expenseService.findById(id);
-		System.out.println(id);
+		
 	
 		int expenseAmount = expIdList.get(expIdList.size() - 1).getAmount();
-		System.out.println(expenseAmount);
 		expIdList.clear();
 		expenseService.deleteItem(id);
+		List<Expense> expList = expenseService.findAll();
 		
 		int income = expenseTracker.getIncome();
 		int expense = expenseTracker.getExpense();
-		int balance =  expenseTracker.getInitialAmount();
-		
+		int balance =  0;
 		if (expenseAmount > 0) {
 			income = expenseTracker.getIncome() - expenseAmount;
 			expenseTracker.setIncome(income);
 			
-			balance -= expenseAmount;
+			balance = expenseTracker.getInitialAmount() - expenseAmount;
 			expenseTracker.setInitialAmount(balance);
-			model.addAttribute("amount", balance);
 
 		} else {
 			expense = expenseTracker.getExpense() - expenseAmount;
 			expenseTracker.setExpense(expense);
 			
-			balance -= expenseAmount;
-			
+			balance = expenseTracker.getInitialAmount() - expenseAmount;
 			expenseTracker.setInitialAmount(balance);
-			model.addAttribute("amount", balance);
 		}
-		
+		model.addAttribute("amount", balance);
 		model.addAttribute("incomeVal", income);
 		model.addAttribute("expense", expense);
-		
-		return "redirect:/addExpense";
+		model.addAttribute("expList", expList);
+		return "addInitialAmount";
+
 	}
 }

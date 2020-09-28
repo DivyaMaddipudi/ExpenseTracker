@@ -37,7 +37,7 @@
 <tr>
 <td>${item.getName()}</td>
 <td>${item.getAmount()}</td>
-<td><a href="${pageContext.request.contextPath }/deleteItem/${item.getId()}" onclick="return confirm('Are you sure?')">Delete</a>
+<td><a href="${pageContext.request.contextPath }/${item.getId()}" onclick="return confirm('Are you sure?')">Delete</a>
 </td>
 </tr>
 </c:forEach>
