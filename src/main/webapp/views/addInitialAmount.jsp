@@ -31,11 +31,14 @@
 <tr>
 <th>Name</th>
 <th>Amount</th>
+<th>Action</th>
 </tr>
 <c:forEach var="item" items="${expList}">
 <tr>
 <td>${item.getName()}</td>
 <td>${item.getAmount()}</td>
+<td><a href="${pageContext.request.contextPath }/deleteItem/${item.getId()}" onclick="return confirm('Are you sure?')">Delete</a>
+</td>
 </tr>
 </c:forEach>
 </table>

@@ -9,7 +9,7 @@
 <body>
 <h2>Expense Tracker</h2>
 <hr>
-<h3>Add initial salary</h3>
+<h3>Add initial amount</h3>
 <form action="addInitialAmount" method="post">
 	 
 	Enter total monthly Amount :
@@ -17,7 +17,6 @@
 	<br>
 	<input type="text" name="basicAmount" placeholder="Add initial amount" required>
 	<br>	
-	<br>
 	<input type="submit">
 </form>
 </body>
