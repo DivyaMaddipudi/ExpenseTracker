@@ -7,6 +7,7 @@ public class ExpenseTrackerModel {
 	
 	private int initialAmount = 0;
 	
+	private int monthlyAmount = 0;
 	private int expense = 0;
 	private int income = 0;
 
@@ -32,5 +33,13 @@ public class ExpenseTrackerModel {
 
 	public void setIncome(int income) {
 		this.income = income;
+	}
+
+	public int getMonthlyAmount() {
+		return monthlyAmount;
+	}
+
+	public void setMonthlyAmount(int monthlyAmount) {
+		this.monthlyAmount = monthlyAmount;
 	}
 }
