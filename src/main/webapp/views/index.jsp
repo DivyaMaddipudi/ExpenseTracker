@@ -94,6 +94,7 @@ span.amount {
 		
 		<div class="w3-panel w3-card">
 		<h3>History</h3>
+		<h4>(Remove previous history)</h4>
 		<table border="0" width="500px">
 			<tr class="w3-panel w3-card">
 				<th>Name</th>

@@ -26,10 +26,10 @@ public class HomeController {
 	private ExpenseService expenseService;
 
 	
-	@GetMapping("/")
-	public String home() {
-		return "index";
-	}
+//	@GetMapping("/")
+//	public String home() {
+//		return "index";
+//	}
 
 //	@RequestMapping(value = "/addInitialAmount", method = RequestMethod.POST)
 //	public String addInitialAmount(@RequestParam("basicAmount") String amount, Model model) {
