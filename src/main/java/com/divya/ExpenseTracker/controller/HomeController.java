@@ -31,14 +31,14 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/addInitialAmount", method = RequestMethod.POST)
-	public String addInitialAmount(@RequestParam("basicAmount") String amount, Model model) {
-		int amt = Integer.parseInt(amount);
-		expenseTracker.setInitialAmount(amt);
-		expenseTracker.setMonthlyAmount(amt);
-		model.addAttribute("amount", amt);
-		return "addInitialAmount";
-	}
+//	@RequestMapping(value = "/addInitialAmount", method = RequestMethod.POST)
+//	public String addInitialAmount(@RequestParam("basicAmount") String amount, Model model) {
+//		int amt = Integer.parseInt(amount);
+//		expenseTracker.setInitialAmount(amt);
+//		expenseTracker.setMonthlyAmount(amt);
+//		model.addAttribute("amount", amt);
+//		return "addInitialAmount";
+//	}
 
 	@RequestMapping(value = "/addExpense", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addExpense(@ModelAttribute Expense exp, Model model) {
@@ -53,9 +53,11 @@ public class HomeController {
 		int balance = 0;
 
 		if (exp.getAmount() > 0) {
+			expenseTracker.setInitialAmount(income);
 			income += exp.getAmount();
 			expenseTracker.setIncome(income);
 
+			
 			balance = exp.getAmount() + expenseTracker.getInitialAmount();
 			expenseTracker.setInitialAmount(balance);
 
@@ -81,7 +83,7 @@ public class HomeController {
 		model.addAttribute("expense", expense);
 		model.addAttribute("expList", expList);
 
-		return "addInitialAmount";
+		return "index";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -101,25 +103,18 @@ public class HomeController {
 		if (expenseAmount > 0) {
 			income = expenseTracker.getIncome() - expenseAmount;
 			expenseTracker.setIncome(income);
-			
-			System.out.println(expenseTracker.getInitialAmount());
-			balance = expenseTracker.getMonthlyAmount() - expenseTracker.getIncome();
-			expenseTracker.setInitialAmount(balance);
 
 		} else {
 			expense = expenseTracker.getExpense() - expenseAmount;
 			expenseTracker.setExpense(expense);
-			
-			System.out.println(expenseTracker.getInitialAmount());
-			System.out.println(expenseTracker.getExpense()+"exp");
-			balance = expenseTracker.getMonthlyAmount() + expenseTracker.getExpense();
-			expenseTracker.setInitialAmount(balance);
 		}
+		
+		balance = expenseTracker.getIncome() + expenseTracker.getExpense();
+		expenseTracker.setInitialAmount(balance);
 		model.addAttribute("amount", balance);
 		model.addAttribute("incomeVal", income);
 		model.addAttribute("expense", expense);
 		model.addAttribute("expList", expList);
-		return "addInitialAmount";
-
+		return "index";
 	}
 }
