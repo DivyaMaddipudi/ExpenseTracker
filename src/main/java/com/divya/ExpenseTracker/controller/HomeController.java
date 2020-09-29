@@ -42,7 +42,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/addExpense", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addExpense(@ModelAttribute Expense exp, Model model) {
-		if (exp.getAmount() != 0) {
+		if (exp.getAmount() != 0 && expenseTracker.getInitialAmount() + exp.getAmount() >= 0) {
 			expenseService.saveItem(exp);
 		}
 
