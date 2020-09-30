@@ -113,7 +113,7 @@ span.amount {
 		</table>
 		</div>
 
-		<form action="" method="post">
+		<form action="addExpense" method="post">
 			<h1>Add new expenses</h1>
 			<div class="formcontainer">
 				<hr />
