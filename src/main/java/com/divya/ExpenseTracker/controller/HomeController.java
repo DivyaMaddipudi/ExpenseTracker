@@ -40,7 +40,7 @@ public class HomeController {
 //		return "addInitialAmount";
 //	}
 
-	@RequestMapping(value = "/addExpense", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/", method = { RequestMethod.POST, RequestMethod.GET })
 	public String addExpense(@ModelAttribute Expense exp, Model model) {
 		if (exp.getAmount() != 0 && expenseTracker.getInitialAmount() + exp.getAmount() >= 0) {
 			expenseService.saveItem(exp);
@@ -57,7 +57,6 @@ public class HomeController {
 			income += exp.getAmount();
 			expenseTracker.setIncome(income);
 
-			
 			balance = exp.getAmount() + expenseTracker.getInitialAmount();
 			expenseTracker.setInitialAmount(balance);
 
