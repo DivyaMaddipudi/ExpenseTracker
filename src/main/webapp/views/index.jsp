@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
 	rel="stylesheet">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<title>Add Expenses</title>
 <style>
 html, body {
 	display: flex;
@@ -22,7 +22,7 @@ form {
 	border: 5px solid #f1f1f1;
 }
 
-input[type=text], input[type=text] {
+input[type=text], input[type=password] {
 	width: 100%;
 	padding: 16px 8px;
 	margin: 8px 0;
@@ -65,53 +65,61 @@ span.amount {
 	padding-top: 0;
 	padding-right: 15px;
 }
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+	span.amount {
+		display: block;
+		float: none;
+	}
+}
 </style>
-<title>Add Expenses</title>
+
 </head>
 <body>
 
 	<div class="container">
-		
-			<h2>Expense Tracker</h2>
-			<h3>YOUR BALANCE</h3>
-			<h3>
-				<span>&#8377;</span> ${amount}
-			</h3>
-	
-	<div class="w3-panel w3-card">
+
+		<h2>Expense Tracker</h2>
+		<h3>YOUR BALANCE</h3>
+		<h3>
+			<span>&#8377;</span> ${amount}
+		</h3>
+
+		<div class="w3-panel w3-card">
 			<table border="0" width="500px">
 				<tr>
 					<th>Income</th>
 					<th>Expense</th>
 				</tr>
 				<tr>
-				
+
 					<td><span>&#8377;</span> ${incomeVal}</td>
 					<td><span>&#8377;</span> ${expense}</td>
-				
+
 				</tr>
 			</table>
 		</div>
-		
+
 		<div class="w3-panel w3-card">
-		<h3>History</h3>
-		<h5>(Remove previous history)</h5>
-		<table border="0" width="500px">
-			<tr class="w3-panel w3-card">
-				<th>Name</th>
-				<th>Amount</th>
-				<th>Action</th>
-			</tr>
-			<c:forEach var="item" items="${expList}">
+			<h3>History</h3>
+			<h5>(Remove previous history)</h5>
+			<table border="0" width="500px">
 				<tr class="w3-panel w3-card">
-					<td>${item.getName()}</td></div>
-					<td><span>&#8377;</span> ${item.getAmount()}</td>
-					<td><a
-						href="${pageContext.request.contextPath }/${item.getId()}"
-						onclick="return confirm('Are you sure?')">Delete</a></td>
+					<th>Name</th>
+					<th>Amount</th>
+					<th>Action</th>
 				</tr>
-			</c:forEach>
-		</table>
+				<c:forEach var="item" items="${expList}">
+					<tr class="w3-panel w3-card">
+						<td>${item.getName()}</td>
+						</div>
+						<td><span>&#8377;</span> ${item.getAmount()}</td>
+						<td><a
+							href="${pageContext.request.contextPath }/${item.getId()}"
+							onclick="return confirm('Are you sure?')">Delete</a></td>
+					</tr>
+				</c:forEach>
+			</table>
 		</div>
 
 		<form action="addExpense" method="post">
@@ -120,9 +128,8 @@ span.amount {
 				<hr />
 				<label for="name"><strong>Name</strong></label> <input type="text"
 					placeholder="Enter items.." name="name" required> <label
-					for="amount"><strong>Amount</strong></label> 
-					<br>
-					<strong>(negative -expense, positive +income)</strong> <input type="text"
+					for="amount"><strong>Amount</strong></label> <br> <strong>(negative
+					-expense, positive +income)</strong> <input type="text"
 					placeholder="Enter amount" name="amount" required>
 			</div>
 			<button type="submit">Add Transaction</button>
